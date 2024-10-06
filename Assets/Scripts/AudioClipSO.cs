@@ -1,18 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class AudioClipSO : MonoBehaviour
+using UnityEngine.Audio;
+[CreateAssetMenu(fileName = "AudioClipSO", menuName = "Scriptable Objects/Audio/AudioClipSO", order = 1)]
+public class AudioClipSO : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AudioClip audioClip;
+    [SerializeField] private AudioMixerSO mixerSO;
+    [Range(0, 1), SerializeField] private float volume = 1f;
+    [Range(-3, 3), SerializeField] private float pitch = 1f;
+
+    public AudioClip AudioClip
     {
-        
+        get { return audioClip; }
+        set { }
     }
 
-    // Update is called once per frame
-    void Update()
+    public float Volume
     {
-        
+        get { return volume; }
+        set { }
+    }
+    public float Pitch
+    {
+        get { return pitch; }
+        set { }
+    }
+    public void PlayOneShoot()
+    {
+        mixerSO.PlayOneShoot(null, this);
+    }
+
+    public void PlayLoop()
+    {
+        mixerSO.PlayLoop(null, this);
     }
 }
